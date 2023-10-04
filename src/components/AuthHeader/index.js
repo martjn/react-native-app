@@ -6,7 +6,10 @@ const AuthHeader = ({ title, onBackPress }) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onBackPress}>
-        <Image source={require("../../assets/auth_back.png")} />
+        <Image
+          style={styles.image}
+          source={require("../../assets/auth_back.png")}
+        />
       </Pressable>
       <Text style={styles.title}>{title}</Text>
     </View>

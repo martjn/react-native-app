@@ -30,7 +30,10 @@ function Signup() {
       <Button style={styles.button} title="Sign In" />
       <Separator text="Or sign up with" />
       <GoogleLogin />
-      <Text style={styles.footerText}>Already have an account?</Text>
+      <Text style={styles.footerText}>
+        Already have an account?
+        <Text style={styles.footerLink}> Sign In</Text>
+      </Text>
     </View>
   );
 }

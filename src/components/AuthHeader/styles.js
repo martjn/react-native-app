@@ -3,10 +3,10 @@ import { colors } from "../../utils/colors";
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    padding: 12,
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 54,
+    marginBottom: 12,
   },
   image: {
     width: 18,
