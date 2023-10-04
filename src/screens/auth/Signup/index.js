@@ -5,6 +5,7 @@ import { View, Text } from "react-native";
 import Input from "../../../components/Input";
 import Checkbox from "../../../components/Checkbox";
 import Button from "../../../components/Button";
+import Separator from "../../../components/Separator";
 
 function Signup() {
   const [checked, setChecked] = useState(false);
@@ -26,6 +27,7 @@ function Signup() {
         </Text>
       </View>
       <Button style={styles.button} title="Sign In" />
+      <Separator text="Or sign up with" />
     </View>
   );
 }
