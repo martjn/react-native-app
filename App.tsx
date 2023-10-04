@@ -25,6 +25,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Splash from "./src/screens/auth/Splash/index.js"
+import Signup from './src/screens/auth/Signup/index.js';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -35,7 +36,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView>
-      <Splash/>
+      <Signup/>
 
     </SafeAreaView>
   );
