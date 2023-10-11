@@ -26,6 +26,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Splash from "./src/screens/auth/Splash/index.js"
 import Signup from './src/screens/auth/Signup/index.js';
+import SignIn from './src/screens/auth/SignIn/index.js';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
@@ -53,7 +54,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView>
-      <Signup/>
+      <SignIn/>
 
     </SafeAreaView>
   );

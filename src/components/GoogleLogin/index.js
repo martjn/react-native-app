@@ -13,10 +13,15 @@ const GoogleLogin = () => {
       // this.setState({ userInfo })
       console.log("userInfo => ", userInfo);
     } catch (error) {
+      console.log(error);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log(error);
       } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log(error);
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log(error);
       } else {
+        console.log(error);
       }
     }
   };
