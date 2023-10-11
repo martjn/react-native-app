@@ -3,7 +3,7 @@ import { TextInput, View, Text, Pressable, Image } from "react-native";
 import { styles } from "./styles";
 import { useState } from "react";
 
-const Input = ({ label, placeholder, isPassword }) => {
+const Input = ({ label, placeholder, isPassword, value, onChangeText }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const onEyePress = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -16,6 +16,8 @@ const Input = ({ label, placeholder, isPassword }) => {
           secureTextEntry={isPassword && !isPasswordVisible}
           placeholder={placeholder}
           style={styles.input}
+          value={value}
+          onChangeText={onChangeText}
         />
         {isPassword ? (
           <Pressable onPress={onEyePress}>
