@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 20,
     borderRadius: 8,
-    width: "100%",
     flex: 1,
   },
   title: {

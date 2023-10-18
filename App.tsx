@@ -38,9 +38,9 @@ import {colors} from './src/utils/colors.js';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ProductDetails from './src/screens/app/ProductDetails/index.js';
-
+import Settings from './src/screens/app/Settings/index.js';
 import Config from 'react-native-config';
-
+import CreateListing from './src/screens/app/CreateListing/index.js';
 const GOOGLE_WEB_CLIENT_ID =
   '525091476988-3e4a4mliva8n42qvr14pi9ucod6n4djo.apps.googleusercontent.com';
 const GOOGLE_IOS_CLIENT_ID =
@@ -54,6 +54,28 @@ type SectionProps = PropsWithChildren<{
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CreateListing"
+        component={CreateListing}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const Tabs = () => {
   return (
@@ -84,7 +106,7 @@ const Tabs = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Favorites" component={Favorites} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Profile" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
