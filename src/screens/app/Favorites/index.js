@@ -8,7 +8,11 @@ import Header from "../../../components/Header";
 
 const Favorites = () => {
   const renderItem = ({ item }) => {
-    return <FavoriteItem {...item} />;
+    const onProductPress = () => {
+      navigation.navigate("productDetails", { product: item });
+    };
+
+    return <FavoriteItem onPress={onProductPress} {...item} />;
   };
   return (
     <SafeAreaView>
