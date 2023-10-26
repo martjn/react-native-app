@@ -32,11 +32,15 @@ const Input = ({
     onChangeText(opt);
     setPickerModalVisible(false);
   };
+  console.log("Options: ", options);
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       {type === "picker" ? (
-        <Pressable style={styles.inputContainer}>
+        <Pressable
+          style={styles.inputContainer}
+          onPress={() => setPickerModalVisible(true)}
+        >
           {value ? (
             <Text style={[styles.placeholder, style]}>{value?.title}</Text>
           ) : (

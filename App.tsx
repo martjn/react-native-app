@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -41,6 +41,8 @@ import ProductDetails from './src/screens/app/ProductDetails/index.js';
 import Settings from './src/screens/app/Settings/index.js';
 import Config from 'react-native-config';
 import CreateListing from './src/screens/app/CreateListing/index.js';
+import {categories} from './src/data/categories.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const GOOGLE_WEB_CLIENT_ID =
   '525091476988-3e4a4mliva8n42qvr14pi9ucod6n4djo.apps.googleusercontent.com';
 const GOOGLE_IOS_CLIENT_ID =
@@ -54,6 +56,8 @@ type SectionProps = PropsWithChildren<{
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+export const UserContext = React.createContext('');
 
 const ProfileStack = () => {
   return (
@@ -92,7 +96,7 @@ const Tabs = () => {
             icon = focused
               ? require('./src/assets/tabs/bookmark_active.png')
               : require('./src/assets/tabs/bookmark.png');
-          } else if (route.name === 'Profile') {
+          } else if (route.name === 'ProfileTab') {
             icon = focused
               ? require('./src/assets/tabs/profile_active.png')
               : require('./src/assets/tabs/profile.png');
@@ -106,13 +110,22 @@ const Tabs = () => {
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Favorites" component={Favorites} />
-      <Tab.Screen name="Profile" component={ProfileStack} />
+      <Tab.Screen name="ProfileTab" component={ProfileStack} />
     </Tab.Navigator>
   );
 };
 
 function App(): JSX.Element {
-  const isSignedIn = true;
+  const isSignedIn = false;
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    async () => {
+      const accessToken = await AsyncStorage.getItem('auth_token');
+      setUser({accessToken});
+    };
+  }, []);
+
   useEffect(() => {
     GoogleSignin.configure({
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -130,42 +143,44 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer theme={theme}>
-        <Stack.Navigator>
-          {isSignedIn ? (
-            <>
-              <Stack.Screen
-                name="Tabs"
-                component={Tabs}
-                options={{headerShown: false}}
-              />
-              <Stack.Screen
-                name="ProductDetails"
-                component={ProductDetails}
-                options={{headerShown: false}}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                name="Splash"
-                component={Splash}
-                options={{headerShown: false}}
-              />
-              <Stack.Screen
-                name="Signup"
-                component={Signup}
-                options={{headerShown: false}}
-              />
-              <Stack.Screen
-                name="SignIn"
-                component={SignIn}
-                options={{headerShown: false}}
-              />
-            </>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
+      <UserContext.Provider value={(user, setUser)}>
+        <NavigationContainer theme={theme}>
+          <Stack.Navigator>
+            {user?.accessToken ? (
+              <>
+                <Stack.Screen
+                  name="Tabs"
+                  component={Tabs}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen
+                  name="ProductDetails"
+                  component={ProductDetails}
+                  options={{headerShown: false}}
+                />
+              </>
+            ) : (
+              <>
+                <Stack.Screen
+                  name="Splash"
+                  component={Splash}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen
+                  name="Signup"
+                  component={Signup}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen
+                  name="SignIn"
+                  component={SignIn}
+                  options={{headerShown: false}}
+                />
+              </>
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </UserContext.Provider>
     </SafeAreaProvider>
   );
 }

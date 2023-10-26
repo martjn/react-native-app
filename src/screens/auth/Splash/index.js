@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, Image, Pressable } from "react-native";
 import { styles } from "./styles";
 import Button from "../../../components/Button";
-
+import { UserContext } from "../../../../App";
 function Splash({ navigation }) {
   console.log("Navigation => ", navigation);
+
+  const user = useContext(UserContext);
+  console.log("user => ", user);
 
   const onSignup = () => {
     navigation.navigate("Signup");
@@ -26,7 +29,7 @@ function Splash({ navigation }) {
         <Text style={styles.title}>Here!</Text>
       </View>
 
-      <Button onPress={onSignup} title="Sign Up" />
+      <Button style={{ flex: 0 }} onPress={onSignup} title="Sign Up" />
       <Pressable onPress={onSignin} hitSlop={20}>
         <Text style={styles.footerText}>Sign In</Text>
       </Pressable>

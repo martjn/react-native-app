@@ -5,17 +5,22 @@ import Header from "../../../components/Header";
 import { styles } from "./styles";
 import ListItem from "../../../components/ListItem";
 import Button from "../../../components/Button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Profile = ({ navigation }) => {
+  const { user, setUser } = useContext(UserContext);
   const num = 10;
-  const onLogout = () => {
-    console.log("logout is clicked");
-  };
   const onSettingsPress = () => {
     navigation.navigate("Settings");
   };
   const onNewListingPress = () => {
     navigation.navigate("CreateListing");
+  };
+  const onLogout = async () => {
+    console.log(user);
+    console.log("logout is clicked");
+    await AsyncStorage.removeItem("auth_token");
+    setUser(null);
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>

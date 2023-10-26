@@ -90,6 +90,8 @@ const CreateListing = ({ navigation, categories }) => {
           <Input
             label="Category"
             placeholder="Select the category"
+            value={values.category}
+            onChangeText={(v) => onChange(v, "category")}
             type="picker"
             options={categories}
           />
